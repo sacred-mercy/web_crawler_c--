@@ -22,8 +22,8 @@ int main()
     int sessionID = 11;
 
     // create datastructure objects for crawler and parser
-    CustomQueue toParseQueue;
-    CustomQueue toVisitQueue;
+    CustomQueue<CustomString> toParseQueue = CustomQueue<CustomString>();
+    CustomQueue<CustomString> toVisitQueue = CustomQueue<CustomString>();
 
     // Create a session object
     Session session = Session(sessionID);
@@ -40,7 +40,7 @@ int main()
     }
     else
     {
-        session.createSession(url);
+        session.createSession();
     }
 
     // Create a crawler object

@@ -1,7 +1,8 @@
 #ifndef CRAWLER_H
 #define CRAWLER_H
 
-#include <../customDS/string/CustomString.h>
+#include "./../../customDS/string/CustomString.h"
+#include "./../../customDS/queue/CustomQueue.h"
 
 class Crawler
 {
@@ -9,10 +10,10 @@ public:
     Crawler(int sessionId);
     ~Crawler();
 
-    void crawlWebsite(const std::string &url);
+    void crawlWebsite(const CustomQueue<CustomString> &queue);
 
 private:
-    string dataFolder = "./sessionData/";
+    CustomString dataFolder = "./sessionData/";
     int sessionID;
 };
 

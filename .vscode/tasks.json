@@ -11,10 +11,13 @@
                 "${fileDirname}/customDS/set/CustomSet.cpp", // CustomSet
                 "${fileDirname}/customDS/map/CustomMap.cpp", // CustomMap
                 "${fileDirname}/customDS/queue/CustomQueue.cpp", // CustomQueue
+                "${fileDirname}/customDS/string/CustomString.cpp", // CustomString
+                "${fileDirname}/customDS/array/CustomVector.cpp", // CustomVector
                 "${fileDirname}/classes/crawler/Crawler.cpp", // Crawler
                 "${fileDirname}/classes/fileHandler/FileHandler.cpp", // FileHandler
                 "${fileDirname}/classes/parser/Parser.cpp", // Parser
                 "${fileDirname}/classes/rateLimiter/RateLimiter.cpp", // RateLimiter
+                "${fileDirname}/classes/session/Session.cpp", // Session
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

@@ -33,7 +33,4 @@ private:
     void resize(std::size_t newCapacity);
 };
 
-// Include the implementation in the header file
-#include "CustomVector.cpp"
-
 #endif // CUSTOMVECTOR_H

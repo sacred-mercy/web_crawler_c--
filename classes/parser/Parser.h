@@ -1,8 +1,8 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#include "./../customDS/array/CustomVector.h"
-#include <./../customDS/string/CustomString.h>
+#include "./../../customDS/array/CustomVector.h"
+#include "./../../customDS/string/CustomString.h"
 
 class Parser
 {

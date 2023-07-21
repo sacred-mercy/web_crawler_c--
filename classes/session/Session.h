@@ -7,7 +7,7 @@ public:
     Session(int sessionID);
     ~Session();
 
-    void createSession(string url);
+    void createSession();
     void continueOrRestartSession(bool answer);
     bool checkSessionExists();
     void forceRestartSession();

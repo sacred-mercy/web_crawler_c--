@@ -12,16 +12,9 @@ Session::Session(int sessionID)
 
 Session::~Session() {}
 
-void Session::createSession(string url)
+void Session::createSession()
 {
-    if (!sessionExists())
-    {
-        cout << "Session created." << endl;
-    }
-    else
-    {
-        std::cout << "Session already exists." << std::endl;
-    }
+    cout << "Session created." << endl;
 }
 
 bool Session::sessionExists()
