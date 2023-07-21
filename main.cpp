@@ -1,8 +1,4 @@
 #include <iostream>
-#include <stdlib.h>
-#include <fstream>
-#include <sstream>
-#include <regex>
 
 // Custom Data Structures
 #include "customDS/queue/CustomQueue.h"
@@ -18,7 +14,7 @@ using namespace std;
 int main()
 {
     // seed url and session id
-    string url = "https://narf.org/";
+    CustomString url = "https://narf.org/";
     int sessionID = 11;
 
     // create datastructure objects for crawler and parser
@@ -41,6 +37,7 @@ int main()
     else
     {
         session.createSession();
+        toVisitQueue.enqueue(url);
     }
 
     // Create a crawler object

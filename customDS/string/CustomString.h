@@ -3,7 +3,7 @@
 
 #include "../array/CustomVector.h"
 
-class CustomString
+class CustomString : public CustomVector<char>
 {
 public:
     // Constructors
@@ -31,8 +31,11 @@ public:
     // Convert CustomString to C-style string (char*)
     const char *c_str() const;
 
-private:
-    CustomVector<char> data;
+    // print the string
+    void print() const;
+
+    // cocatinates two strings
+    CustomString operator+(const CustomString &other) const;
 };
 
 #endif // CUSTOMSTRING_H

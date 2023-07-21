@@ -18,19 +18,26 @@ Crawler::Crawler(int sessionId)
 
 Crawler::~Crawler() {}
 
-void Crawler::crawlWebsite(const CustomQueue<CustomString> &queue)
+void Crawler::crawlWebsite(CustomQueue<CustomString> &queue)
 {
-    // CustomString command = "curl -o " + dataFolder + sessionID + ".html ";
-    // int result = system(command.c_str());
+    // URL of the website you want to fetch HTML data from
+    std::string url = "https://example.com";
 
-    // if (result == 0)
-    // {
-    //     cout << "Data fetched successfully." << std::endl;
-    // }
-    // else
-    // {
-    //     std::cerr << "Error fetching data." << std::endl;
-    // }
+    std::string curlCommand = "curl " + url + " -o output.html ";
 
-    std::cout << "Crawling website." << std::endl;
+    // Concatenate the URL and curl command
+    std::string fullCommand = curlCommand + url;
+
+    // Execute the command using the system function
+    int result = std::system(fullCommand.c_str());
+
+    // Check if the command was executed successfully
+    if (result == 0)
+    {
+        std::cout << "Website HTML data fetched successfully." << std::endl;
+    }
+    else
+    {
+        std::cout << "Failed to fetch website HTML data." << std::endl;
+    }
 }

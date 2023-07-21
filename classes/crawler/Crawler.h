@@ -10,7 +10,7 @@ public:
     Crawler(int sessionId);
     ~Crawler();
 
-    void crawlWebsite(const CustomQueue<CustomString> &queue);
+    void crawlWebsite(CustomQueue<CustomString> &queue);
 
 private:
     CustomString dataFolder = "./sessionData/";
