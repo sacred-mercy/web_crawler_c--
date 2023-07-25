@@ -1,7 +1,7 @@
 #include <iostream>
 
 // Custom Data Structures
-#include "customDS/queue/CustomQueue.h"
+#include "customDS/CustomQueue.h"
 #include "customDS/string/CustomString.h"
 
 // classes
@@ -14,10 +14,10 @@ using namespace std;
 int main()
 {
     // seed url and session id
-    CustomString url = "https://narf.org/";
+    CustomString url = "https://www.example.com";
     int sessionID = 11;
 
-    // create datastructure objects for crawler and parser
+    // objects for crawler and parser queue
     CustomQueue<CustomString> toParseQueue = CustomQueue<CustomString>();
     CustomQueue<CustomString> toVisitQueue = CustomQueue<CustomString>();
 
@@ -37,7 +37,8 @@ int main()
     else
     {
         session.createSession();
-        toVisitQueue.enqueue(url);
+        CustomString seedUrl = url + " f0 5";
+        toVisitQueue.enqueue(seedUrl);
     }
 
     // Create a crawler object
@@ -48,7 +49,30 @@ int main()
 
     while (toParseQueue.size() > 0 || toVisitQueue.size() > 0)
     {
-        crawler.crawlWebsite(toVisitQueue);
-        parser.parseHTML(toParseQueue);
+        cout << "toCrawlQueue size: " << toVisitQueue.size() << endl;
+        if (toVisitQueue.size() != 0)
+        {
+            cout << "crawling : " << toVisitQueue.front().c_str() << endl;
+            CustomString result = crawler.crawlWebsite(toVisitQueue);
+            if (result != "")
+                toParseQueue.enqueue(result);
+        }
+
+        cout << "toParseQueue size: " << toParseQueue.size() << endl;
+        if (toParseQueue.size() != 0)
+        {
+            CustomVector<CustomString> links = parser.parseHTML(toParseQueue);
+            if (links.size() != 0)
+            {
+                for (std::size_t i = 0; i < links.size(); i++)
+                {
+                    toVisitQueue.enqueue(links.get(i));
+                }
+            }
+            else
+            {
+                cout << "No links found" << endl;
+            }
+        }
     }
 }

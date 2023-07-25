@@ -2,12 +2,10 @@
 #include <iostream>
 #include <cstring> // for strlen and strcpy
 
-#include "../array/CustomVector.h"
+#include "../CustomVector.h"
 
 // Default Constructor
-CustomString::CustomString() : CustomVector<char>()
-{
-}
+CustomString::CustomString() : CustomVector<char>() {}
 
 // Constructor with C-style string input
 CustomString::CustomString(const char *str) : CustomVector<char>()
@@ -22,16 +20,12 @@ CustomString::CustomString(const char *str) : CustomVector<char>()
 }
 
 // Destructor
-CustomString::~CustomString()
-{
-}
+CustomString::~CustomString() {}
 
 // Copy constructor
-CustomString::CustomString(const CustomString &other) : CustomVector<char>(other)
-{
-}
+CustomString::CustomString(const CustomString &other) : CustomVector<char>(other) {}
 
-// Assignment operator
+// Copy assignment operator
 CustomString &CustomString::operator=(const CustomString &other)
 {
     if (this == &other)
@@ -41,6 +35,19 @@ CustomString &CustomString::operator=(const CustomString &other)
 
     CustomVector<char>::operator=(other);
 
+    return *this;
+}
+
+// Move constructor
+CustomString::CustomString(CustomString &&other) noexcept : CustomVector<char>(std::move(other)) {}
+
+// Move assignment operator
+CustomString &CustomString::operator=(CustomString &&other) noexcept
+{
+    if (this != &other)
+    {
+        CustomVector<char>::operator=(std::move(other));
+    }
     return *this;
 }
 
@@ -108,4 +115,44 @@ CustomString CustomString::operator+(const CustomString &other) const
     }
 
     return result;
+}
+
+// split the string into a vector of strings
+CustomVector<CustomString> CustomString::split(char delimiter) const
+{
+    CustomVector<CustomString> result = CustomVector<CustomString>();
+
+    CustomString currentString = CustomString();
+
+    for (std::size_t i = 0; i < size(); i++)
+    {
+        if (get(i) == delimiter)
+        {
+            result.push_back(currentString);
+            currentString = CustomString();
+        }
+        else
+        {
+            currentString.push_back(get(i));
+        }
+    }
+
+    result.push_back(currentString); // for last string
+
+    return result;
+}
+
+// to check not equal to
+bool CustomString::operator!=(const CustomString &other) const
+{
+    if (size() != other.size())
+        return true;
+
+    for (std::size_t i = 0; i < size(); i++)
+    {
+        if (get(i) != other.get(i))
+            return true;
+    }
+
+    return false;
 }

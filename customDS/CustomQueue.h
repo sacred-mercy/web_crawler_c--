@@ -1,7 +1,8 @@
 #ifndef CUSTOMQUEUE_H
 #define CUSTOMQUEUE_H
 
-#include "./../array/CustomVector.h"
+#include "./CustomVector.h"
+#include <iostream>
 
 template <typename T>
 class CustomQueue : public CustomVector<T>
@@ -10,7 +11,8 @@ public:
     // Constructor
     CustomQueue();
 
-    // Destructor (Note: You don't need to redefine the destructor if it doesn't have additional functionality.)
+    // Destructor
+    ~CustomQueue();
 
     // Enqueue an element to the back of the queue
     void enqueue(const T &value);
@@ -23,6 +25,9 @@ public:
 
     // Check if the queue is empty
     bool empty() const;
+
+    // print the queue
+    void print() const;
 };
 
 // Constructor
@@ -31,6 +36,14 @@ CustomQueue<T>::CustomQueue() : CustomVector<T>()
 {
     // The CustomVector constructor will be called automatically.
     // No need to define anything here as we have already defined the CustomVector constructor.
+}
+
+// Destructor
+template <typename T>
+CustomQueue<T>::~CustomQueue()
+{
+    // The CustomVector destructor will be called automatically.
+    // No need to define anything here as we have already defined the CustomVector destructor.
 }
 
 // Enqueue an element to the back of the queue
@@ -70,6 +83,18 @@ bool CustomQueue<T>::empty() const
 {
     // We can check if the queue is empty by checking if its size is 0.
     return this->size() == 0;
+}
+
+// print the queue
+template <typename T>
+void CustomQueue<T>::print() const
+{
+    // We can print the queue by iterating over all elements and printing them.
+    for (std::size_t i = 0; i < this->size(); i++)
+    {
+        std::cout << this->data[i] << " ";
+    }
+    std::cout << std::endl;
 }
 
 #endif // CUSTOMQUEUE_H

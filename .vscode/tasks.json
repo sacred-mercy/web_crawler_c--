@@ -10,14 +10,14 @@
                 "${file}",
                 // "${fileDirname}/customDS/set/CustomSet.cpp", // CustomSet
                 // "${fileDirname}/customDS/map/CustomMap.cpp", // CustomMap
-                "${fileDirname}/customDS/queue/CustomQueue.h", // CustomQueue
+                "${fileDirname}/customDS/CustomQueue.h", // CustomQueue
                 "${fileDirname}/customDS/string/CustomString.cpp", // CustomString
-                "${fileDirname}/customDS/array/CustomVector.h", // CustomVector
-                // "${fileDirname}/classes/crawler/Crawler.cpp", // Crawler
-                // "${fileDirname}/classes/fileHandler/FileHandler.cpp", // FileHandler
-                // "${fileDirname}/classes/parser/Parser.cpp", // Parser
+                "${fileDirname}/customDS/CustomVector.h", // CustomVector
+                "${fileDirname}/classes/crawler/Crawler.cpp", // Crawler
+                "${fileDirname}/classes/fileHandler/FileHandler.cpp", // FileHandler
+                "${fileDirname}/classes/parser/Parser.cpp", // Parser
                 // "${fileDirname}/classes/rateLimiter/RateLimiter.cpp", // RateLimiter
-                // "${fileDirname}/classes/session/Session.cpp", // Session
+                "${fileDirname}/classes/session/Session.cpp", // Session
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

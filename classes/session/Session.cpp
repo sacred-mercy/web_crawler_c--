@@ -2,6 +2,11 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib> // for system()
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -14,7 +19,8 @@ Session::~Session() {}
 
 void Session::createSession()
 {
-    cout << "Session created." << endl;
+    // Create a folder for the session
+    // mkdir(sessionID, 0777);
 }
 
 bool Session::sessionExists()

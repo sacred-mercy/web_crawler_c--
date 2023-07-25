@@ -49,7 +49,7 @@ CustomVector<T>::CustomVector()
 template <typename T>
 CustomVector<T>::~CustomVector()
 {
-    delete[] data;
+    // delete[] data;
 }
 
 // Add an element to the vector

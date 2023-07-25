@@ -1,13 +1,19 @@
+// CustomString.h
+
 #ifndef CUSTOMSTRING_H
 #define CUSTOMSTRING_H
 
-#include "../array/CustomVector.h"
+#include "../CustomVector.h"
+#include <iostream>
+#include <cstring> // for strlen and strcpy
 
 class CustomString : public CustomVector<char>
 {
 public:
-    // Constructors
+    // Default Constructor
     CustomString();
+
+    // Constructor with C-style string input
     CustomString(const char *str);
 
     // Destructor
@@ -16,8 +22,14 @@ public:
     // Copy constructor
     CustomString(const CustomString &other);
 
-    // Assignment operator
+    // Copy assignment operator
     CustomString &operator=(const CustomString &other);
+
+    // Move constructor
+    CustomString(CustomString &&other) noexcept;
+
+    // Move assignment operator
+    CustomString &operator=(CustomString &&other) noexcept;
 
     // Get the length of the string
     std::size_t length() const;
@@ -34,8 +46,14 @@ public:
     // print the string
     void print() const;
 
-    // cocatinates two strings
+    // concatenates two strings
     CustomString operator+(const CustomString &other) const;
+
+    // to check not equal to
+    bool operator!=(const CustomString &other) const;
+
+    // split the string into a vector of strings
+    CustomVector<CustomString> split(char delimiter) const;
 };
 
 #endif // CUSTOMSTRING_H

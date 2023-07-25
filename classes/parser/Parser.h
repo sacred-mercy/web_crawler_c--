@@ -1,8 +1,9 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#include "./../../customDS/array/CustomVector.h"
 #include "./../../customDS/string/CustomString.h"
+#include "./../../customDS/CustomQueue.h"
+#include <string>
 
 class Parser
 {
@@ -14,13 +15,13 @@ public:
     ~Parser();
 
     // Parse the HTML file
-    void parseHTML(CustomVector<CustomString> &toParseQueue);
+    CustomVector<CustomString> parseHTML(CustomQueue<CustomString> &toParseQueue);
 
 private:
-    CustomString content; // HTML file content
+    // CustomString content; // HTML file content
 
     // Helper function to extract links from the HTML file
-    void extractData(CustomString content);
+    CustomVector<std::string> extractData(std::string content);
 };
 
 #endif // PARSER_H

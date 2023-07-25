@@ -2,7 +2,7 @@
 #define CRAWLER_H
 
 #include "./../../customDS/string/CustomString.h"
-#include "./../../customDS/queue/CustomQueue.h"
+#include "./../../customDS/CustomQueue.h"
 
 class Crawler
 {
@@ -10,7 +10,7 @@ public:
     Crawler(int sessionId);
     ~Crawler();
 
-    void crawlWebsite(CustomQueue<CustomString> &queue);
+    CustomString crawlWebsite(CustomQueue<CustomString> &queue);
 
 private:
     CustomString dataFolder = "./sessionData/";
