@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctime>
+#include <thread>
 
 // Custom Data Structures
 #include "customDS/CustomQueue.h"
@@ -49,10 +51,11 @@ int main()
 
     while (toParseQueue.size() > 0 || toVisitQueue.size() > 0)
     {
-        cout << "toCrawlQueue size: " << toVisitQueue.size() << endl;
+        double crawlStartTime = time(0);
+        cout
+            << "toCrawlQueue size: " << toVisitQueue.size() << endl;
         if (toVisitQueue.size() != 0)
         {
-            cout << "crawling : " << toVisitQueue.front().c_str() << endl;
             CustomString result = crawler.crawlWebsite(toVisitQueue);
             if (result != "")
                 toParseQueue.enqueue(result);
@@ -63,16 +66,18 @@ int main()
         {
             CustomVector<CustomString> links = parser.parseHTML(toParseQueue);
             if (links.size() != 0)
-            {
                 for (std::size_t i = 0; i < links.size(); i++)
-                {
                     toVisitQueue.enqueue(links.get(i));
-                }
-            }
-            else
-            {
-                cout << "No links found" << endl;
-            }
+        }
+
+        double parseEndTime = time(0);
+
+        double crawlTime = parseEndTime - crawlStartTime;
+
+        // sleep if crawl time is less than 6 seconds
+        if (crawlTime < 6)
+        {
+            std::this_thread::sleep_for(crawlTime * 1s);
         }
     }
 }

@@ -156,3 +156,38 @@ bool CustomString::operator!=(const CustomString &other) const
 
     return false;
 }
+
+// to convert number to string
+CustomString CustomString::operator+(int number) const
+{
+    CustomString result = CustomString();
+
+    if (number == 0)
+    {
+        result.push_back('0');
+        return result;
+    }
+
+    while (number != 0)
+    {
+        int digit = number % 10;
+        result.push_back(digit + '0');
+        number /= 10;
+    }
+
+    // reverse the string by creating a new custom string and pushing the characters in reverse order
+    CustomString reversed = CustomString();
+
+    // Copy the first string
+    for (std::size_t i = 0; i < size(); i++)
+    {
+        reversed.push_back(get(i));
+    }
+
+    for (std::size_t i = result.size(); i > 0; i--)
+    {
+        reversed.push_back(result.get(i - 1));
+    }
+
+    return reversed;
+}

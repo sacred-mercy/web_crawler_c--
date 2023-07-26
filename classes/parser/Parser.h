@@ -20,6 +20,9 @@ public:
 private:
     // CustomString content; // HTML file content
 
+    CustomString dataFolder = "sessionData/";
+    int sessionId;
+
     // Helper function to extract links from the HTML file
     CustomVector<std::string> extractData(std::string content);
 };

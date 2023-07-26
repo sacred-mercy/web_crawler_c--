@@ -54,6 +54,9 @@ public:
 
     // split the string into a vector of strings
     CustomVector<CustomString> split(char delimiter) const;
+
+    // conactenates custom string with a integer
+    CustomString operator+(int other) const;
 };
 
 #endif // CUSTOMSTRING_H

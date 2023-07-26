@@ -49,6 +49,7 @@ CustomVector<T>::CustomVector()
 template <typename T>
 CustomVector<T>::~CustomVector()
 {
+    // FIXME: double free memory error
     // delete[] data;
 }
 

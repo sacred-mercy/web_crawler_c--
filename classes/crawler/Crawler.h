@@ -14,7 +14,7 @@ public:
 
 private:
     CustomString dataFolder = "./sessionData/";
-    int sessionID;
+    int sessionId;
 };
 
 #endif // CRAWLER_H

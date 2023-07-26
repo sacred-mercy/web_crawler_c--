@@ -15,7 +15,6 @@ public:
 
 private:
     int sessionID;
-    bool sessionExists();
 };
 
 #endif // SESSION_H

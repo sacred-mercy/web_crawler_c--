@@ -6,15 +6,13 @@
 #include <regex> // for regex
 #include <string>
 
-// libxml2
-#include <libxml/HTMLparser.h>
-#include <libxml/xpath.h>
-
 using namespace std;
 
 // Constructor
-Parser::Parser(int sessionID)
+Parser::Parser(int sessionId)
 {
+    this->sessionId = sessionId;
+    dataFolder = dataFolder + sessionId + "/" + "data/";
 }
 
 // Destructor
@@ -23,10 +21,12 @@ Parser::~Parser()
 }
 
 // Helper function to extract links from the HTML file
+// TODO: use customString instead of string
 CustomVector<string> Parser::extractData(string html)
 {
     // use regex to extract links
-    regex linkRegex(R"(\b((?:https?:\/\/|www\.|\/\/)(?!.*\.(css|js|pdf|jpg|jpeg|png|gif))[-a-zA-Z0-9+&@#\/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#\/%=~_|]*))");
+    regex linkRegex(R"(\b((?:https?:\/\/|www\.)[a-zA-Z0-9+&@#\/%?=~_|!:,.;-]*\.[a-zA-Z]{2,}[a-zA-Z0-9+&@#\/%=~_|]*))");
+
     smatch match;
     CustomVector<string> links = CustomVector<string>();
 
@@ -60,7 +60,7 @@ CustomVector<CustomString> Parser::parseHTML(CustomQueue<CustomString> &toParseQ
 
     // Open the HTML file
     std::ifstream htmlFile;
-    CustomString filePath = "sessionData/";
+    CustomString filePath = dataFolder;
     filePath = filePath + fileIndex + ".html";
     std::cout << "filePath: " << filePath.c_str() << std::endl;
     htmlFile.open(filePath.c_str());

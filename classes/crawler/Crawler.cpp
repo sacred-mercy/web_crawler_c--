@@ -2,21 +2,14 @@
 #include <iostream>
 #include <cstdlib> // for system()
 
-#include <chrono>
-#include <thread>
-
-using namespace std::chrono_literals;
-
 // include custom data structures
 #include "../../customDS/CustomQueue.h"
 #include "../../customDS/string/CustomString.h"
 
 Crawler::Crawler(int sessionId)
 {
-    sessionID = sessionId;
-
-    // Create a folder for the session
-    // mkdir(dataFolder, 0777);
+    this->sessionId = sessionId;
+    dataFolder = dataFolder + sessionId + "/" + "data/";
 }
 
 Crawler::~Crawler() {}
@@ -36,11 +29,10 @@ CustomString Crawler::crawlWebsite(CustomQueue<CustomString> &queue)
 
     // Create a curl command to fetch the HTML data
     CustomString curlCommand = "curl ";
-    curlCommand = curlCommand + url + +" -o sessionData/" + fileIndex + ".html";
+    curlCommand = curlCommand + url + +" -o " + dataFolder + fileIndex + ".html";
 
     // Execute the command using the system function
     std::cout << curlCommand.c_str() << std::endl;
-    std::this_thread::sleep_for(2s);
     int result = std::system(curlCommand.c_str());
 
     // Check if the command was executed successfully

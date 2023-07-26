@@ -20,12 +20,45 @@ Session::~Session() {}
 void Session::createSession()
 {
     // Create a folder for the session
-    // mkdir(sessionID, 0777);
+    string command = "mkdir -p sessionData/" + to_string(sessionID);
+    system(command.c_str());
+
+    // create htmlFiles folder
+    command = "mkdir -p sessionData/" + to_string(sessionID) + "/data";
+    system(command.c_str());
+
+    // Create a file for the session
+    string path = "sessionData/" + to_string(sessionID) + "/toParseQueue.txt";
+    ofstream file(path.c_str());
+    file.close();
+
+    path = "sessionData/" + to_string(sessionID) + "/toVisitQueue.txt";
+    file.open(path.c_str());
+    file.close();
+
+    path = "sessionData/" + to_string(sessionID) + "/visited.txt";
+    file.open(path.c_str());
+    file.close();
 }
 
-bool Session::sessionExists()
+bool Session::checkSessionExists()
 {
-    return false;
+    // TODO: Check if the session exists
+    // Check if the folder exists
+    struct stat info;
+    string path = "sessionData/" + to_string(sessionID);
+    if (stat(path.c_str(), &info) != 0)
+    {
+        return false;
+    }
+    else if (info.st_mode & S_IFDIR)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 void Session::continueOrRestartSession(bool answer)
@@ -40,30 +73,16 @@ void Session::continueOrRestartSession(bool answer)
     }
 }
 
-bool Session::checkSessionExists()
-{
-    return false;
-}
-
-// bool fileExists(const std::string &fileName)
-// {
-//     std::ifstream file(fileName);
-//     return file.good();
-// }
-
 void Session::forceRestartSession()
 {
-    cout << "Session restarted." << endl;
+    // Delete the folder
+    string command = "rm -rf sessionData/" + to_string(sessionID);
+    system(command.c_str());
+    // Create a folder for the session
+    createSession();
 }
 
 void Session::continueSession()
 {
-    if (sessionExists())
-    {
-        std::cout << "Session continued." << std::endl;
-    }
-    else
-    {
-        std::cout << "Session does not exist." << std::endl;
-    }
+    // TODO: Continue the session
 }
