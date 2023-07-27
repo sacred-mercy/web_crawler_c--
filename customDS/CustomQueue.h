@@ -8,12 +8,6 @@ template <typename T>
 class CustomQueue : public CustomVector<T>
 {
 public:
-    // Constructor
-    CustomQueue();
-
-    // Destructor
-    ~CustomQueue();
-
     // Enqueue an element to the back of the queue
     void enqueue(const T &value);
 
@@ -29,22 +23,6 @@ public:
     // print the queue
     void print() const;
 };
-
-// Constructor
-template <typename T>
-CustomQueue<T>::CustomQueue() : CustomVector<T>()
-{
-    // The CustomVector constructor will be called automatically.
-    // No need to define anything here as we have already defined the CustomVector constructor.
-}
-
-// Destructor
-template <typename T>
-CustomQueue<T>::~CustomQueue()
-{
-    // The CustomVector destructor will be called automatically.
-    // No need to define anything here as we have already defined the CustomVector destructor.
-}
 
 // Enqueue an element to the back of the queue
 template <typename T>

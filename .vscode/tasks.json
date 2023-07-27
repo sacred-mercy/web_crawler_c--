@@ -8,16 +8,17 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
-                // "${fileDirname}/customDS/set/CustomSet.cpp", // CustomSet
-                // "${fileDirname}/customDS/map/CustomMap.cpp", // CustomMap
-                "${fileDirname}/customDS/CustomQueue.h", // CustomQueue
-                "${fileDirname}/customDS/string/CustomString.cpp", // CustomString
-                "${fileDirname}/customDS/CustomVector.h", // CustomVector
-                "${fileDirname}/classes/crawler/Crawler.cpp", // Crawler
-                "${fileDirname}/classes/fileHandler/FileHandler.cpp", // FileHandler
-                "${fileDirname}/classes/parser/Parser.cpp", // Parser
-                // "${fileDirname}/classes/rateLimiter/RateLimiter.cpp", // RateLimiter
-                "${fileDirname}/classes/session/Session.cpp", // Session
+                // "${fileDirname}/customDS/set/CustomSet.cpp",
+                // "${fileDirname}/customDS/map/CustomMap.cpp",
+                "${fileDirname}/customDS/CustomQueue.h",
+                "${fileDirname}/customDS/string/CustomString.cpp",
+                "${fileDirname}/customDS/CustomVector.h",
+                "${fileDirname}/customDS/CustomList.h",
+                "${fileDirname}/classes/crawler/Crawler.cpp",
+                "${fileDirname}/classes/fileHandler/FileHandler.cpp",
+                "${fileDirname}/classes/parser/Parser.cpp",
+                // "${fileDirname}/classes/rateLimiter/RateLimiter.cpp",
+                "${fileDirname}/classes/session/Session.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

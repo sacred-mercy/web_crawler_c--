@@ -50,7 +50,6 @@ CustomVector<string> Parser::extractData(string html)
 CustomVector<CustomString> Parser::parseHTML(CustomQueue<CustomString> &toParseQueue)
 {
     CustomString contentToParse = toParseQueue.front();
-    std::cout << "contentToParse: " << contentToParse.c_str() << std::endl;
     toParseQueue.dequeue();
 
     CustomString fileIndex, depth;
@@ -62,13 +61,11 @@ CustomVector<CustomString> Parser::parseHTML(CustomQueue<CustomString> &toParseQ
     std::ifstream htmlFile;
     CustomString filePath = dataFolder;
     filePath = filePath + fileIndex + ".html";
-    std::cout << "filePath: " << filePath.c_str() << std::endl;
     htmlFile.open(filePath.c_str());
 
     // Check if the file was opened successfully
     if (htmlFile.is_open())
     {
-        std::cout << "Successfully opened HTML file." << std::endl;
 
         // Read the file content into a string
         std::string line;
@@ -111,17 +108,10 @@ CustomVector<CustomString> Parser::parseHTML(CustomQueue<CustomString> &toParseQ
             linksWithDepth.push_back(finalData);
         }
 
-        // print linksWithDepth
-        for (int i = 0; i < linksWithDepth.size(); i++)
-        {
-            std::cout << "linksWithDepth: " << linksWithDepth.get(i).c_str() << std::endl;
-        }
-
         return linksWithDepth;
     }
     else
     {
-        std::cout << "Failed to open HTML file." << std::endl;
         return CustomVector<CustomString>();
     }
 }

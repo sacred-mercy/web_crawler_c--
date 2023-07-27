@@ -1,7 +1,8 @@
 #ifndef CUSTOMVECTOR_H
 #define CUSTOMVECTOR_H
 
-#include <cstddef> // for std::size_t
+#include <cstddef>   // for std::size_t
+#include <algorithm> // for std::swap
 
 template <typename T>
 class CustomVector
@@ -9,6 +10,18 @@ class CustomVector
 public:
     // Constructor
     CustomVector();
+
+    // Copy Constructor
+    CustomVector(const CustomVector &other);
+
+    // Copy Assignment Operator
+    CustomVector &operator=(const CustomVector &other);
+
+    // Move Constructor
+    CustomVector(CustomVector &&other);
+
+    // Move Assignment Operator
+    CustomVector &operator=(CustomVector &&other);
 
     // Destructor
     ~CustomVector();
@@ -49,8 +62,58 @@ CustomVector<T>::CustomVector()
 template <typename T>
 CustomVector<T>::~CustomVector()
 {
-    // FIXME: double free memory error
-    // delete[] data;
+    delete[] data;
+}
+
+// Copy Constructor
+template <typename T>
+CustomVector<T>::CustomVector(const CustomVector &other)
+    : currentSize(other.currentSize), capacity(other.capacity)
+{
+    data = new T[capacity];
+    std::copy(other.data, other.data + currentSize, data);
+}
+
+// Copy Assignment Operator
+template <typename T>
+CustomVector<T> &CustomVector<T>::operator=(const CustomVector &other)
+{
+    if (this != &other)
+    {
+        CustomVector<T> temp(other);
+        std::swap(data, temp.data);
+        currentSize = temp.currentSize;
+        capacity = temp.capacity;
+    }
+    return *this;
+}
+
+// Move Constructor
+template <typename T>
+CustomVector<T>::CustomVector(CustomVector &&other)
+    : data(other.data), currentSize(other.currentSize), capacity(other.capacity)
+{
+    other.data = nullptr;
+    other.currentSize = 0;
+    other.capacity = 0;
+}
+
+// Move Assignment Operator
+template <typename T>
+CustomVector<T> &CustomVector<T>::operator=(CustomVector &&other)
+{
+    if (this != &other)
+    {
+        delete[] data;
+        data = other.data;
+        currentSize = other.currentSize;
+        capacity = other.capacity;
+
+        other.data = nullptr;
+        other.currentSize = 0;
+        other.capacity = 0;
+    }
+    return *this;
 }
 
 // Add an element to the vector

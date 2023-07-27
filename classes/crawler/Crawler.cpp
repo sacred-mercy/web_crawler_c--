@@ -38,13 +38,11 @@ CustomString Crawler::crawlWebsite(CustomQueue<CustomString> &queue)
     // Check if the command was executed successfully
     if (result == 0)
     {
-        std::cout << "Successfully fetched website HTML data." << std::endl;
         CustomString toParse = fileIndex + " " + depth;
         return toParse;
     }
     else
     {
-        std::cout << "Failed to fetch website HTML data." << std::endl;
         return "";
     }
 }

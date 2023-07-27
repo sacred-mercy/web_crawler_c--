@@ -1,20 +1,25 @@
 #ifndef SESSION_H
 #define SESSION_H
 
+#include "./../../customDS/CustomQueue.h"
+#include "./../../customDS/string/CustomString.h"
+#include "./../fileHandler/FileHandler.h"
+
 class Session
 {
 public:
     Session(int sessionID);
-    ~Session();
-
     void createSession();
     void continueOrRestartSession(bool answer);
     bool checkSessionExists();
     void forceRestartSession();
     void continueSession();
+    void saveSession(const CustomQueue<CustomString> &toVisitQueue, const CustomQueue<CustomString> &toParseQueue);
+    void loadSession();
 
 private:
     int sessionID;
+    CustomString path = "sessionData/";
 };
 
 #endif // SESSION_H
