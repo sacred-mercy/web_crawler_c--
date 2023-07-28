@@ -59,20 +59,63 @@ bool Session::checkSessionExists()
     }
 }
 
-void Session::saveSession(const CustomQueue<CustomString> &toVisitQueue, const CustomQueue<CustomString> &toParseQueue)
+void Session::saveSession()
 {
-    CustomString toVisitPath = path + "/toVisitQueue.txt";
-    CustomString toParsePath = path + "/toParseQueue.txt";
     FileHandler fileHandler;
-    fileHandler.writeFile(toVisitPath, toVisitQueue);
-    fileHandler.writeFile(toParsePath, toParseQueue);
+    fileHandler.writeFile(path + "/toVisitQueue.txt", toVisitQueue);
+    fileHandler.writeFile(path + "/toParseQueue.txt", toParseQueue);
 }
 
-void Session::loadSession(CustomQueue<CustomString> &toVisitQueue, CustomQueue<CustomString> &toParseQueue)
+void Session::loadSession()
 {
-    CustomString toVisitPath = path + "/toVisitQueue.txt";
-    CustomString toParsePath = path + "/toParseQueue.txt";
     FileHandler fileHandler;
-    toVisitQueue = fileHandler.readFileToQueue(toVisitPath);
-    toParseQueue = fileHandler.readFileToQueue(toParsePath);
+    toVisitQueue = fileHandler.readFileToQueue(path + "/toVisitQueue.txt");
+    toParseQueue = fileHandler.readFileToQueue(path + "/toParseQueue.txt");
+}
+
+CustomString Session::getToParseFile()
+{
+    CustomString toParse = toParseQueue.front();
+    toParseQueue.dequeue();
+    return toParse;
+}
+
+CustomString Session::getToVisitLink()
+{
+    CustomString toVisit = toVisitQueue.front();
+    toVisitQueue.dequeue();
+    return toVisit;
+}
+
+void Session::setSeedUrl(CustomString seedUrl)
+{
+    toVisitQueue.enqueue(seedUrl);
+}
+
+void Session::AddLinksToVisit(CustomQueue<CustomString> links)
+{
+    while (!links.empty())
+    {
+        CustomString link = links.front();
+        links.dequeue();
+        // if (visitedLinks.find(link) == visitedLinks.end())
+        // {
+        toVisitQueue.enqueue(link);
+        // }
+    }
+}
+
+void Session::AddFilesToParse(CustomString file)
+{
+    toParseQueue.enqueue(file);
+}
+
+bool Session::isToVisitQueueEmpty()
+{
+    return toVisitQueue.empty();
+}
+
+bool Session::isToParseQueueEmpty()
+{
+    return toParseQueue.empty();
 }

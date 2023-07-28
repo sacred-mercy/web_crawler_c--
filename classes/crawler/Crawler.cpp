@@ -14,11 +14,9 @@ Crawler::Crawler(int sessionId)
 
 Crawler::~Crawler() {}
 
-CustomString Crawler::crawlWebsite(CustomQueue<CustomString> &queue)
+void Crawler::crawlWebsite(Session &session)
 {
-    // URL of the website you want to fetch HTML data from
-    CustomString urlData = queue.front();
-    queue.dequeue();
+    CustomString urlData = session.getToVisitLink();
 
     // split the urlData into url and fileIndex and depth
     CustomVector<CustomString> urlDataSplit = urlData.split(' ');
@@ -39,10 +37,6 @@ CustomString Crawler::crawlWebsite(CustomQueue<CustomString> &queue)
     if (result == 0)
     {
         CustomString toParse = fileIndex + " " + depth;
-        return toParse;
-    }
-    else
-    {
-        return "";
+        session.AddFilesToParse(toParse);
     }
 }

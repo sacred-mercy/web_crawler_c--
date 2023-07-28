@@ -38,9 +38,7 @@ public:
     // Start the web crawler
     void start(CustomString url, int sessionID, int depth)
     {
-        // objects for crawler and parser queue
-        CustomQueue<CustomString> toParseQueue = CustomQueue<CustomString>();
-        CustomQueue<CustomString> toVisitQueue = CustomQueue<CustomString>();
+        CustomString seedUrl = url + " f0 " + depth;
 
         // Create a session object
         Session session = Session(sessionID);
@@ -56,14 +54,18 @@ public:
             if (choice == 1)
             {
                 // load the session data
-                session.loadSession(toVisitQueue, toParseQueue);
+                session.loadSession();
+            }
+            else
+            {
+                session.createSession();
+                session.setSeedUrl(seedUrl);
             }
         }
         else
         {
             session.createSession();
-            CustomString seedUrl = url + " f0 " + depth;
-            toVisitQueue.enqueue(seedUrl);
+            session.setSeedUrl(seedUrl);
         }
 
         // Create a crawler object
@@ -72,29 +74,24 @@ public:
         // Create parser object
         Parser parser = Parser(sessionID);
 
-        while (toParseQueue.size() > 0 || toVisitQueue.size() > 0)
+        while (session.isToParseQueueEmpty() == false || session.isToVisitQueueEmpty() == false)
         {
             // crawl the website
             double crawlStartTime = time(0);
-            cout
-                << "toCrawlQueue size: " << toVisitQueue.size() << endl;
-            if (toVisitQueue.size() != 0)
+
+            if (!session.isToVisitQueueEmpty())
             {
-                CustomString result = crawler.crawlWebsite(toVisitQueue);
-                if (result != "")
-                    toParseQueue.enqueue(result);
+                crawler.crawlWebsite(session);
             }
 
             // parse the html
-            if (toParseQueue.size() != 0)
+            if (!session.isToParseQueueEmpty())
             {
-                CustomVector<CustomString> links = parser.parseHTML(toParseQueue);
-                for (std::size_t i = 0; i < links.size(); i++)
-                    toVisitQueue.enqueue(links.get(i));
+                parser.parseHTML(session);
             }
 
             // save the session data
-            session.saveSession(toVisitQueue, toParseQueue);
+            session.saveSession();
 
             double parseEndTime = time(0);
 
@@ -103,6 +100,7 @@ public:
             // sleep if crawl time is less than 6 seconds
             if (crawlTime < 6)
             {
+                cout << "Sleeping for " << crawlTime << " seconds" << endl;
                 std::this_thread::sleep_for(crawlTime * 1s);
             }
         }

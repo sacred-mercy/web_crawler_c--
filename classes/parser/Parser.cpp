@@ -47,10 +47,9 @@ CustomVector<string> Parser::extractData(string html)
 }
 
 // // Parse the HTML file
-CustomVector<CustomString> Parser::parseHTML(CustomQueue<CustomString> &toParseQueue)
+void Parser::parseHTML(Session &session)
 {
-    CustomString contentToParse = toParseQueue.front();
-    toParseQueue.dequeue();
+    CustomString contentToParse = session.getToParseFile();
 
     CustomString fileIndex, depth;
     CustomVector<CustomString> contentToParseSplit = contentToParse.split(' ');
@@ -82,7 +81,7 @@ CustomVector<CustomString> Parser::parseHTML(CustomQueue<CustomString> &toParseQ
         CustomVector<string> links = extractData(content);
 
         // Add fileindex and depth-1 after the link
-        CustomVector<CustomString> linksWithDepth = CustomVector<CustomString>();
+        CustomQueue<CustomString> linksWithDepth = CustomQueue<CustomString>();
         for (int i = 0; i < links.size(); i++)
         {
             string link = links.get(i);
@@ -103,15 +102,10 @@ CustomVector<CustomString> Parser::parseHTML(CustomQueue<CustomString> &toParseQ
             char *tab2 = new char[linkWithDepth.length() + 1];
             strcpy(tab2, linkWithDepth.c_str());
 
-            // add to vector
+            // add to queue
             CustomString finalData = CustomString(tab2);
             linksWithDepth.push_back(finalData);
         }
-
-        return linksWithDepth;
-    }
-    else
-    {
-        return CustomVector<CustomString>();
+        session.AddLinksToVisit(linksWithDepth);
     }
 }

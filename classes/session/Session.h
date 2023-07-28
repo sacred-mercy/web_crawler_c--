@@ -4,22 +4,33 @@
 #include "./../../customDS/CustomQueue.h"
 #include "./../../customDS/string/CustomString.h"
 #include "./../fileHandler/FileHandler.h"
+#include <set>
 
 class Session
 {
 public:
     Session(int sessionID);
     void createSession();
-    void continueOrRestartSession(bool answer);
     bool checkSessionExists();
-    void forceRestartSession();
-    void continueSession();
-    void saveSession(const CustomQueue<CustomString> &toVisitQueue, const CustomQueue<CustomString> &toParseQueue);
-    void loadSession(CustomQueue<CustomString> &toVisitQueue, CustomQueue<CustomString> &toParseQueue);
+    void saveSession();
+    void loadSession();
+
+    CustomString getToParseFile();
+    CustomString getToVisitLink();
+
+    void setSeedUrl(CustomString seedUrl);
+    void AddLinksToVisit(CustomQueue<CustomString> links);
+    void AddFilesToParse(CustomString file);
+
+    bool isToVisitQueueEmpty();
+    bool isToParseQueueEmpty();
 
 private:
     int sessionID;
     CustomString path = "sessionData/";
+    CustomQueue<CustomString> toVisitQueue;
+    CustomQueue<CustomString> toParseQueue;
+    std::set<CustomString> visitedLinks;
 };
 
 #endif // SESSION_H
