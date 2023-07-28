@@ -49,11 +49,15 @@ public:
         {
             // ask user if they want to continue or restart
             cout << "Session already exists. ";
-            cout << "Do you want to continue or restart ? (c / r) " << endl;
-            char choice;
+            cout << "Do you want to continue session? (1/0) " << endl;
+            int choice;
             cin >> choice;
 
-            session.continueOrRestartSession(choice == 'c');
+            if (choice == 1)
+            {
+                // load the session data
+                session.loadSession(toVisitQueue, toParseQueue);
+            }
         }
         else
         {
@@ -85,9 +89,8 @@ public:
             if (toParseQueue.size() != 0)
             {
                 CustomVector<CustomString> links = parser.parseHTML(toParseQueue);
-                if (links.size() != 0)
-                    for (std::size_t i = 0; i < links.size(); i++)
-                        toVisitQueue.enqueue(links.get(i));
+                for (std::size_t i = 0; i < links.size(); i++)
+                    toVisitQueue.enqueue(links.get(i));
             }
 
             // save the session data
@@ -103,6 +106,8 @@ public:
                 std::this_thread::sleep_for(crawlTime * 1s);
             }
         }
+
+        cout << "Crawling complete" << endl;
     }
 };
 

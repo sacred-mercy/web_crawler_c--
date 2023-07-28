@@ -1,6 +1,4 @@
 #include "CustomString.h"
-#include <iostream>
-#include <cstring> // for strlen and strcpy
 
 #include "../CustomVector.h"
 

@@ -15,7 +15,7 @@ public:
     void forceRestartSession();
     void continueSession();
     void saveSession(const CustomQueue<CustomString> &toVisitQueue, const CustomQueue<CustomString> &toParseQueue);
-    void loadSession();
+    void loadSession(CustomQueue<CustomString> &toVisitQueue, CustomQueue<CustomString> &toParseQueue);
 
 private:
     int sessionID;
