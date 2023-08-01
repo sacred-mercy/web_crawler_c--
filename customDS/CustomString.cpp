@@ -1,6 +1,4 @@
-#include "CustomString.h"
-
-#include "../CustomVector.h"
+#include <CustomString.h>
 
 // Default Constructor
 CustomString::CustomString() : CustomVector<char>() {}

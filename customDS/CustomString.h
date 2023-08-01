@@ -1,7 +1,7 @@
 #ifndef CUSTOMSTRING_H
 #define CUSTOMSTRING_H
 
-#include "../CustomVector.h"
+#include <CustomVector.h>
 #include <iostream>
 #include <cstring> // for strlen and strcpy
 

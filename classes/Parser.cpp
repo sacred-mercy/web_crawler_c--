@@ -1,10 +1,4 @@
-// parser.cpp
-
-#include "Parser.h"
-#include <fstream> // for file input
-#include <iostream>
-#include <regex> // for regex
-#include <string>
+#include <Parser.h>
 
 using namespace std;
 

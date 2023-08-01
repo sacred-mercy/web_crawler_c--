@@ -1,10 +1,4 @@
-#include "Crawler.h"
-#include <iostream>
-#include <cstdlib> // for system()
-
-// include custom data structures
-#include "../../customDS/CustomQueue.h"
-#include "../../customDS/string/CustomString.h"
+#include <Crawler.h>
 
 Crawler::Crawler(int sessionId)
 {

@@ -1,5 +1,5 @@
 // FileHandler.cpp
-#include "FileHandler.h"
+#include <FileHandler.h>
 
 bool FileHandler::writeFile(const CustomString filename, const CustomString &data)
 {
@@ -8,6 +8,19 @@ bool FileHandler::writeFile(const CustomString filename, const CustomString &dat
         return false;
 
     file << data.c_str();
+    file.close();
+    return true;
+}
+
+// append data to a file from a string
+bool FileHandler::appendFile(const CustomString filename, const CustomString &data)
+{
+    // open file in append mode
+    std::ofstream file(filename.c_str(), std::ios_base::app);
+    if (!file.is_open())
+        return false;
+
+    file << data.c_str() << std::endl;
     file.close();
     return true;
 }
@@ -74,6 +87,41 @@ CustomQueue<CustomString> FileHandler::readFileToQueue(const CustomString filena
         if (ch == '\n')
         {
             result.enqueue(line);
+            line = "";
+        }
+        else
+        {
+            line.append(ch);
+        }
+        ch = fgetc(ptr);
+    }
+
+    fclose(ptr);
+
+    return result;
+}
+
+CustomHashSet<CustomString> FileHandler::readFileToHashSet(const CustomString filename)
+{
+    CustomHashSet<CustomString> result;
+    CustomString line;
+
+    FILE *ptr;
+    char ch;
+    ptr = fopen(filename.c_str(), "r");
+
+    if (ptr == NULL)
+    {
+        std::cout << "Cannot open file\n";
+        exit(0);
+    }
+
+    ch = fgetc(ptr);
+    while (ch != EOF)
+    {
+        if (ch == '\n')
+        {
+            result.insert(line);
             line = "";
         }
         else

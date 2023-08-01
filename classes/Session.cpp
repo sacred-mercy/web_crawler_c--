@@ -1,4 +1,4 @@
-#include "Session.h" // for class declaration
+#include <Session.h> // for class declaration
 
 using namespace std;
 
@@ -27,7 +27,7 @@ void Session::createSession(CustomString seedUrl)
     file.open(path.c_str());
     file.close();
 
-    path = "sessionData/" + to_string(sessionID) + "/visited.txt";
+    path = "sessionData/" + to_string(sessionID) + "/uniqueLinks.txt";
     file.open(path.c_str());
     file.close();
 
@@ -66,6 +66,7 @@ void Session::loadSession()
     FileHandler fileHandler;
     toVisitQueue = fileHandler.readFileToQueue(path + "/toVisitQueue.txt");
     toParseQueue = fileHandler.readFileToQueue(path + "/toParseQueue.txt");
+    visitedLinks = fileHandler.readFileToHashSet(path + "/uniqueLinks.txt");
 }
 
 CustomString Session::getToParseFile()
@@ -84,25 +85,29 @@ CustomString Session::getToVisitLink()
 
 void Session::setSeedUrl(CustomString seedUrl)
 {
-    toVisitQueue.enqueue(seedUrl);
+    CustomQueue<CustomString> links;
+    links.enqueue(seedUrl);
+    AddLinksToVisit(links);
 }
 
 void Session::AddLinksToVisit(CustomQueue<CustomString> links)
 {
     while (!links.empty())
     {
+        // Get the first link
         CustomString link = links.front();
         links.dequeue();
 
+        // Check if the link has already been visited
         CustomString url = link.split(' ').get(0);
         if (visitedLinks.contains(url))
-        {
-            links.dequeue();
             continue;
-        }
 
-        toVisitQueue.enqueue(link);
-        visitedLinks.insert(url);
+        toVisitQueue.enqueue(link); // Add the link to the toVisitQueue
+        visitedLinks.insert(url);   // Add the link to the visited links
+
+        FileHandler fileHandler;
+        fileHandler.appendFile(path + "/uniqueLinks.txt", url);
     }
 }
 

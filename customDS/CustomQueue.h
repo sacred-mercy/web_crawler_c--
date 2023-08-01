@@ -1,7 +1,7 @@
 #ifndef CUSTOMQUEUE_H
 #define CUSTOMQUEUE_H
 
-#include "./CustomVector.h"
+#include <CustomVector.h>
 #include <iostream>
 
 template <typename T>

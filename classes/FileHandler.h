@@ -6,14 +6,18 @@
 #include <stdio.h>  // read/write operations
 #include <stdlib.h> // for exit() function
 
-#include "./../../customDS/string/CustomString.h"
-#include "./../../customDS/CustomQueue.h"
+#include <CustomString.h>
+#include <CustomQueue.h>
+#include <CustomHashSet.h>
 
 class FileHandler
 {
 public:
     // Write data to a file from a string
     bool writeFile(const CustomString filename, const CustomString &data);
+
+    // Append data to a file from a string
+    bool appendFile(const CustomString filename, const CustomString &data);
 
     // Write data to a file from a queue
     bool writeFile(const CustomString filename, const CustomQueue<CustomString> &data);
@@ -23,6 +27,9 @@ public:
 
     // Read data from a file and return it as a queue
     CustomQueue<CustomString> readFileToQueue(const CustomString filename);
+
+    // Read data from a file and return it as a hash set
+    CustomHashSet<CustomString> readFileToHashSet(const CustomString filename);
 };
 
 #endif // FILE_HANDLER_H

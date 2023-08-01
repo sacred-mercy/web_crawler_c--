@@ -1,11 +1,14 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#include "./../../customDS/string/CustomString.h"
-#include "./../../customDS/CustomQueue.h"
-#include "./../session/Session.h"
+#include <CustomString.h>
+#include <CustomQueue.h>
+#include <Session.h>
+
+#include <fstream> // for file input
+#include <iostream>
+#include <regex> // for regex
 #include <string>
-#include <set>
 
 class Parser
 {

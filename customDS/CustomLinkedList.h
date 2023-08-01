@@ -1,7 +1,7 @@
 #ifndef CUSTOMLINKEDLIST_H
 #define CUSTOMLINKEDLIST_H
 
-#include "./../string/CustomString.h"
+#include <CustomString.h>
 
 // Forward declaration of CustomHashSet class
 template <typename T>

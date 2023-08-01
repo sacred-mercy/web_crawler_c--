@@ -6,7 +6,7 @@ int main()
     WebCrawler *webCrawler = WebCrawler::getWebCrawler();
 
     // Start the web crawler
-    webCrawler->start("https://sacred-mercy.github.io/personal-website/", 1, 1);
+    webCrawler->start("https://sacred-mercy.github.io/personal-website/", 11, 1);
 
     return 0;
 }

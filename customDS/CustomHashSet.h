@@ -1,8 +1,8 @@
 #ifndef CUSTOM_HASH_SET_H
 #define CUSTOM_HASH_SET_H
 
-#include "./../LList/CustomLinkedList.h"
-#include "./../CustomQueue.h"
+#include <CustomLinkedList.h>
+#include <CustomQueue.h>
 
 // Custom hash set using chaining with a linked list
 template <typename T>

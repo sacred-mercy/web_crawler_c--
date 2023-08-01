@@ -8,10 +8,10 @@
 #include <sys/stat.h>  // for stat()
 #include <unistd.h>    // for stat()
 
-#include "./../../customDS/CustomQueue.h"
-#include "./../../customDS/string/CustomString.h"
-#include "./../fileHandler/FileHandler.h"
-#include "./../../customDS/set/CustomHashSet.h"
+#include <CustomString.h>
+#include <CustomQueue.h>
+#include <FileHandler.h>
+#include <CustomHashSet.h>
 
 class Session
 {

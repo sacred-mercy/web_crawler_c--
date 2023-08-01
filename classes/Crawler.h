@@ -1,9 +1,14 @@
 #ifndef CRAWLER_H
 #define CRAWLER_H
 
-#include "./../../customDS/string/CustomString.h"
-#include "./../../customDS/CustomQueue.h"
-#include "./../session/Session.h"
+// include standard libraries
+#include <iostream>
+#include <cstdlib> // for system()
+
+// include custom data structures
+#include <Session.h>
+#include <CustomQueue.h>
+#include <CustomString.h>
 
 class Crawler
 {

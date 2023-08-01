@@ -3,13 +3,13 @@
 #include <thread>
 
 // Custom Data Structures
-#include "customDS/CustomQueue.h"
-#include "customDS/string/CustomString.h"
+#include <CustomString.h>
+#include <CustomQueue.h>
 
 // classes
-#include "classes/crawler/Crawler.h"
-#include "classes/parser/Parser.h"
-#include "classes/session/Session.h"
+#include <Crawler.h>
+#include <Parser.h>
+#include <Session.h>
 
 using namespace std;
 
