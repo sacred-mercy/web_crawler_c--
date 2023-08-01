@@ -9,13 +9,12 @@ class Crawler
 {
 public:
     Crawler(int sessionId);
-    ~Crawler();
 
     void crawlWebsite(Session &session);
 
 private:
-    CustomString dataFolder = "./sessionData/";
     int sessionId;
+    CustomString dataFolder = "./sessionData/";
 };
 
 #endif // CRAWLER_H

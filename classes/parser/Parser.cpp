@@ -15,11 +15,6 @@ Parser::Parser(int sessionId)
     dataFolder = dataFolder + sessionId + "/" + "data/";
 }
 
-// Destructor
-Parser::~Parser()
-{
-}
-
 // Helper function to extract links from the HTML file
 // TODO: use customString instead of string
 CustomVector<string> Parser::extractData(string html)

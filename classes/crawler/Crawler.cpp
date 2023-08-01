@@ -12,8 +12,6 @@ Crawler::Crawler(int sessionId)
     dataFolder = dataFolder + sessionId + "/" + "data/";
 }
 
-Crawler::~Crawler() {}
-
 void Crawler::crawlWebsite(Session &session)
 {
     CustomString urlData = session.getToVisitLink();
@@ -30,13 +28,9 @@ void Crawler::crawlWebsite(Session &session)
     curlCommand = curlCommand + url + +" -o " + dataFolder + fileIndex + ".html";
 
     // Execute the command using the system function
-    std::cout << curlCommand.c_str() << std::endl;
     int result = std::system(curlCommand.c_str());
 
     // Check if the command was executed successfully
     if (result == 0)
-    {
-        CustomString toParse = fileIndex + " " + depth;
-        session.AddFilesToParse(toParse);
-    }
+        session.AddFilesToParse(fileIndex + " " + depth);
 }

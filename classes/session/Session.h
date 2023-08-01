@@ -1,16 +1,23 @@
 #ifndef SESSION_H
 #define SESSION_H
 
+#include <iostream>    // for cout
+#include <fstream>     // for file handling
+#include <cstdlib>     // for system()
+#include <sys/types.h> // for stat()
+#include <sys/stat.h>  // for stat()
+#include <unistd.h>    // for stat()
+
 #include "./../../customDS/CustomQueue.h"
 #include "./../../customDS/string/CustomString.h"
 #include "./../fileHandler/FileHandler.h"
-#include <set>
+#include "./../../customDS/set/CustomHashSet.h"
 
 class Session
 {
 public:
     Session(int sessionID);
-    void createSession();
+    void createSession(CustomString seedUrl);
     bool checkSessionExists();
     void saveSession();
     void loadSession();
@@ -30,7 +37,7 @@ private:
     CustomString path = "sessionData/";
     CustomQueue<CustomString> toVisitQueue;
     CustomQueue<CustomString> toParseQueue;
-    std::set<CustomString> visitedLinks;
+    CustomHashSet<CustomString> visitedLinks;
 };
 
 #endif // SESSION_H

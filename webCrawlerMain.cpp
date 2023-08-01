@@ -52,20 +52,13 @@ public:
             cin >> choice;
 
             if (choice == 1)
-            {
-                // load the session data
-                session.loadSession();
-            }
+                session.loadSession(); // load the session data
             else
-            {
-                session.createSession();
-                session.setSeedUrl(seedUrl);
-            }
+                session.createSession(seedUrl);
         }
         else
         {
-            session.createSession();
-            session.setSeedUrl(seedUrl);
+            session.createSession(seedUrl);
         }
 
         // Create a crawler object
@@ -76,36 +69,26 @@ public:
 
         while (session.isToParseQueueEmpty() == false || session.isToVisitQueueEmpty() == false)
         {
-            // crawl the website
-            double crawlStartTime = time(0);
+            double crawlStartTime = time(0); // start time of crawling
 
+            // crawl the website
             if (!session.isToVisitQueueEmpty())
-            {
                 crawler.crawlWebsite(session);
-            }
 
             // parse the html
             if (!session.isToParseQueueEmpty())
-            {
                 parser.parseHTML(session);
-            }
 
-            // save the session data
-            session.saveSession();
+            session.saveSession(); // save the session data
 
-            double parseEndTime = time(0);
+            double parseEndTime = time(0); // end time of parsing
 
-            double crawlTime = parseEndTime - crawlStartTime;
+            double totalCrawlTime = parseEndTime - crawlStartTime;
 
             // sleep if crawl time is less than 6 seconds
-            if (crawlTime < 6)
-            {
-                cout << "Sleeping for " << crawlTime << " seconds" << endl;
-                std::this_thread::sleep_for(crawlTime * 1s);
-            }
+            if (totalCrawlTime < 6)
+                std::this_thread::sleep_for(totalCrawlTime * 1s);
         }
-
-        cout << "Crawling complete" << endl;
     }
 };
 

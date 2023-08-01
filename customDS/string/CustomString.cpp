@@ -189,3 +189,28 @@ CustomString CustomString::operator+(int number) const
 
     return reversed;
 }
+
+// to check if two strings are equal
+bool CustomString::operator==(const CustomString &other) const
+{
+    if (size() != other.size())
+        return false;
+
+    for (std::size_t i = 0; i < size(); i++)
+    {
+        if (get(i) != other.get(i))
+            return false;
+    }
+
+    return true;
+}
+
+// overloading the << operator
+std::ostream &operator<<(std::ostream &os, const CustomString &str)
+{
+    for (std::size_t i = 0; i < str.size(); i++)
+    {
+        os << str.get(i);
+    }
+    return os;
+}

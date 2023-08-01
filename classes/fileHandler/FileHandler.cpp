@@ -1,6 +1,5 @@
 // FileHandler.cpp
 #include "FileHandler.h"
-#include <iostream>
 
 bool FileHandler::writeFile(const CustomString filename, const CustomString &data)
 {
@@ -31,33 +30,60 @@ bool FileHandler::writeFile(const CustomString filename, const CustomQueue<Custo
 
 CustomString FileHandler::readFile(const CustomString filename)
 {
-    std::ifstream file(filename.c_str());
-    if (!file.is_open())
-        return "";
-
-    std::string line;
     CustomString result;
-    while (std::getline(file, line))
+
+    FILE *ptr;
+    char ch;
+    ptr = fopen(filename.c_str(), "r");
+
+    if (ptr == NULL)
     {
-        result = result + line.c_str();
-        result = result + "\n";
+        std::cout << "Cannot open file\n";
+        exit(0);
     }
-    file.close();
+
+    ch = fgetc(ptr);
+    while (ch != EOF)
+    {
+        result.append(ch);
+        ch = fgetc(ptr);
+    }
+
+    fclose(ptr);
     return result;
 }
 
 CustomQueue<CustomString> FileHandler::readFileToQueue(const CustomString filename)
 {
-    std::ifstream file(filename.c_str());
-    if (!file.is_open())
-        return CustomQueue<CustomString>();
-
-    std::string line;
     CustomQueue<CustomString> result;
-    while (std::getline(file, line))
+    CustomString line;
+
+    FILE *ptr;
+    char ch;
+    ptr = fopen(filename.c_str(), "r");
+
+    if (ptr == NULL)
     {
-        result.enqueue(line.c_str());
+        std::cout << "Cannot open file\n";
+        exit(0);
     }
-    file.close();
+
+    ch = fgetc(ptr);
+    while (ch != EOF)
+    {
+        if (ch == '\n')
+        {
+            result.enqueue(line);
+            line = "";
+        }
+        else
+        {
+            line.append(ch);
+        }
+        ch = fgetc(ptr);
+    }
+
+    fclose(ptr);
+
     return result;
 }

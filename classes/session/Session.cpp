@@ -1,12 +1,4 @@
-#include "Session.h"
-#include <iostream>
-#include <fstream>
-#include <cstdlib> // for system()
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "Session.h" // for class declaration
 
 using namespace std;
 
@@ -16,7 +8,7 @@ Session::Session(int sessionID)
     path = path + sessionID;
 }
 
-void Session::createSession()
+void Session::createSession(CustomString seedUrl)
 {
     // Create a folder for the session
     string command = "mkdir -p sessionData/" + to_string(sessionID);
@@ -38,6 +30,8 @@ void Session::createSession()
     path = "sessionData/" + to_string(sessionID) + "/visited.txt";
     file.open(path.c_str());
     file.close();
+
+    setSeedUrl(seedUrl);
 }
 
 bool Session::checkSessionExists()
@@ -59,6 +53,7 @@ bool Session::checkSessionExists()
     }
 }
 
+// TODO: Save data of visited links
 void Session::saveSession()
 {
     FileHandler fileHandler;
@@ -98,10 +93,16 @@ void Session::AddLinksToVisit(CustomQueue<CustomString> links)
     {
         CustomString link = links.front();
         links.dequeue();
-        // if (visitedLinks.find(link) == visitedLinks.end())
-        // {
+
+        CustomString url = link.split(' ').get(0);
+        if (visitedLinks.contains(url))
+        {
+            links.dequeue();
+            continue;
+        }
+
         toVisitQueue.enqueue(link);
-        // }
+        visitedLinks.insert(url);
     }
 }
 

@@ -32,11 +32,20 @@ public:
     // Get an element at a specific index
     T get(std::size_t index) const;
 
+    // Get an element pointer at a specific index
+    T *getPtr(std::size_t index) const;
+
     // Get the size of the vector
     std::size_t size() const;
 
     // Reserve memory for the vector
     void reserve(std::size_t newCapacity);
+
+    // insert an element at a specific index
+    void insert(std::size_t index, const T &value);
+
+    // Helper function to resize the vector
+    void resize(std::size_t newCapacity);
 
 protected:
     static const std::size_t DEFAULT_CAPACITY = 10;
@@ -44,9 +53,6 @@ protected:
     T *data;
     std::size_t currentSize;
     std::size_t capacity;
-
-    // Helper function to resize the vector
-    void resize(std::size_t newCapacity);
 };
 
 // Constructor
@@ -136,6 +142,13 @@ T CustomVector<T>::get(std::size_t index) const
     return data[index];
 }
 
+// Get an element pointer at a specific index
+template <typename T>
+T *CustomVector<T>::getPtr(std::size_t index) const
+{
+    return &data[index];
+}
+
 // Get the size of the vector
 template <typename T>
 std::size_t CustomVector<T>::size() const
@@ -180,6 +193,18 @@ void CustomVector<T>::resize(std::size_t newCapacity)
     delete[] data;
     data = newData;
     capacity = newCapacity;
+}
+
+// replace an element at a specific index
+template <typename T>
+void CustomVector<T>::insert(std::size_t index, const T &value)
+{
+    if (index >= currentSize)
+    {
+        return;
+    }
+
+    data[index] = value;
 }
 
 #endif // CUSTOMVECTOR_H

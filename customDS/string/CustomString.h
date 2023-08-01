@@ -1,5 +1,3 @@
-// CustomString.h
-
 #ifndef CUSTOMSTRING_H
 #define CUSTOMSTRING_H
 
@@ -57,6 +55,12 @@ public:
 
     // conactenates custom string with a integer
     CustomString operator+(int other) const;
+
+    // to check if two strings are equal
+    bool operator==(const CustomString &other) const;
+
+    // overload the << operator
+    friend std::ostream &operator<<(std::ostream &out, const CustomString &str);
 };
 
 #endif // CUSTOMSTRING_H

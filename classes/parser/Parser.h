@@ -13,9 +13,6 @@ public:
     // Constructor
     Parser(int sessionID);
 
-    // Destructor
-    ~Parser();
-
     // Parse the HTML file
     void parseHTML(Session &session);
 
